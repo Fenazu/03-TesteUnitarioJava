@@ -205,6 +205,16 @@ Se a view **Testing** não aparecer automaticamente no Codespaces:
 3. Abra a Paleta de Comandos e execute **Java: Import Java Projects in Workspace**.
 4. Se ainda não aparecer, execute **Java: Clean Java Language Server Workspace** e recarregue a janela.
 
+### Checklist rápido (quando o Test Explorer sumir)
+
+Se a aba **Testing** continuar vazia no Codespaces, siga esta sequência curta:
+
+1. Execute **Developer: Reload Window**.
+2. Execute **Java: Import Java Projects in Workspace**.
+3. Execute **Java: Clean Java Language Server Workspace** e recarregue.
+4. Confirme no terminal: `./mvnw test`.
+5. Se persistir, faça **Codespaces: Rebuild Container**.
+
 > O workspace já está configurado para abrir em modo **Standard** e preferir o Maven Wrapper. Isso é necessário porque o modo **LightWeight** não resolve dependências Maven e pode impedir que a árvore de testes seja exibida.
 
 ### Troubleshooting visual da view Testing
