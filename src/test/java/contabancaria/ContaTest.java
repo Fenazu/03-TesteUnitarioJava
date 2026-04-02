@@ -138,4 +138,31 @@ class ContaTest {
     // - Conta encerrada tem isAtiva() == false
     // =======================================================
 
+    @Test
+    void encerrar_ContaComSaldoZero_EncerraConta() {
+        // Arrange
+        var conta = new Conta("Maria", 0);
+        // Act
+        conta.encerrar();
+        // Assert
+        assertEquals(false, conta.isAtiva());
+    }
+
+    @Test
+    void encerrar_ContaComSaldo_LancaIllegalStateException() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        // Act
+        assertThrows(IllegalStateException.class, () -> conta.encerrar());
+    }
+
+    @Test
+    void encerrar_ContaJaInativa_LancaIllegalStateException() {
+        // Arrange
+        var conta = new Conta("Maria", 0);
+        conta.encerrar();
+        // Act
+        assertThrows(IllegalStateException.class, () -> conta.encerrar());
+    }
+
 }
