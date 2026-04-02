@@ -174,6 +174,7 @@ class ContaTest {
         assertThrows(IllegalStateException.class, () -> conta.sacar(50));
 
     }
+
     // =======================================================
     // Testes para transferir
     // Sugestão de testes:
@@ -183,7 +184,64 @@ class ContaTest {
     // - Transferência com conta origem inativa lança exceção
     // - Transferência com conta destino inativa lança exceção
     // =======================================================
+    @Test
+    void transferir_ValorValido_AtualizaSaldo() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        var conta2 = new Conta("João", 100);
+        // Act
+        conta.transferir(conta2, 50);
+        // Assert
+        assertEquals(50, conta.getSaldo());
+        assertEquals(150, conta2.getSaldo());
+    }
 
+    @Test
+    void transferir_ValorMaiorQueSaldo_LancaIllegalStateException() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        var conta2 = new Conta("João", 100);
+        // Act
+        assertThrows(IllegalStateException.class, () -> conta.transferir(conta2, 150));
+    }
+
+    @Test
+    void transferir_ValorZero_LancaIllegalArgumentException() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        var conta2 = new Conta("João", 100);
+        // Act
+        assertThrows(IllegalArgumentException.class, () -> conta.transferir(conta2, 0));
+    }
+
+    @Test
+    void transferir_ValorNegativo_LancaIllegalArgumentException() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        var conta2 = new Conta("João", 100);
+        // Act
+        assertThrows(IllegalArgumentException.class, () -> conta.transferir(conta2, -50));
+    }
+
+    @Test
+    void transferir_ContaOrigemInativa_LancaIllegalStateException() {
+        // Arrange
+        var conta = new Conta("Maria", 0);
+        conta.encerrar();
+        var conta2 = new Conta("João", 100);
+        // Act
+        assertThrows(IllegalStateException.class, () -> conta.transferir(conta2, 50));
+    }
+
+    @Test
+    void transferir_ContaDestinoInativa_LancaIllegalStateException() {
+        // Arrange
+        var conta = new Conta("Maria", 100);
+        var conta2 = new Conta("João", 0);
+        conta2.encerrar();
+        // Act
+        assertThrows(IllegalStateException.class, () -> conta.transferir(conta2, 50));
+    }
     // =======================================================
     // Testes para encerrar
     // Sugestão de testes:
