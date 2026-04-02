@@ -106,6 +106,26 @@ public class Conta {
      * - O saldo de ambas as contas deve ser atualizado corretamente.
      */
 
+    public void transferir(Conta destino, double valor) {
+
+        if (!ativa)
+            throw new IllegalStateException("A conta deve estar ativa.");
+
+        if (!destino.ativa)
+            throw new IllegalStateException("A conta deve estar ativa.");
+
+        if (valor <= 0)
+            throw new IllegalArgumentException("O valor deve ser maior que zero.");
+
+        if (saldo < valor)
+            throw new IllegalStateException("Saldo insuficiente.");
+
+        this.saldo -= valor;
+
+        destino.saldo += valor;
+
+    }
+
     /**
      * Encerra a conta.
      * Regras:
