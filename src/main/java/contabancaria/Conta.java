@@ -79,10 +79,6 @@ public class Conta {
      * - Não pode sacar mais do que o saldo (lançar IllegalStateException).
      * - O saldo deve ser atualizado corretamente.
      */
-    public void sacar(double valor) {
-        // TODO: Implemente usando TDD
-        throw new UnsupportedOperationException();
-    }
 
     /**
      * Transfere valor desta conta para outra.
@@ -92,10 +88,6 @@ public class Conta {
      * - Saldo deve ser suficiente (lançar IllegalStateException).
      * - O saldo de ambas as contas deve ser atualizado corretamente.
      */
-    public void transferir(Conta destino, double valor) {
-        // TODO: Implemente usando TDD
-        throw new UnsupportedOperationException();
-    }
 
     /**
      * Encerra a conta.
@@ -105,8 +97,16 @@ public class Conta {
      * saldo).
      * - A propriedade ativa deve ser alterada para false.
      */
+
     public void encerrar() {
-        // TODO: Implemente usando TDD
-        throw new UnsupportedOperationException();
+        if (!ativa)
+            throw new IllegalStateException("A conta deve estar ativa.");
+
+        if (saldo != 0)
+            throw new IllegalStateException("O saldo deve ser zero para encerrar.");
+
+        this.ativa = false;
+
     }
+
 }
